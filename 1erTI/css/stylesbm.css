@@ -1,0 +1,243 @@
+/* 1. RESET Y CONFIGURACIÓN GLOBAL */
+* {
+    /* box-sizing: Obliga a que el padding y el borde se incluyan dentro del ancho total del elemento, evitando que las cajas se deformen */
+    box-sizing: border-box; 
+    /* margin y padding en 0: Quita los espacios en blanco que los navegadores ponen por defecto */
+    margin: 0;
+    padding: 0;
+}
+
+/* Configuracion de la raiz del documento */
+html {
+    /* font-family: Define el tipo de letra principal */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-size: Tamaño de letra base. 16px es el estándar de internet */
+    font-size: 16px;
+    /* scroll-behavior: Hace que al navegar por la página, el movimiento sea suave y no un salto brusco */
+    scroll-behavior: smooth;
+}
+
+/* Fondo de toda la pagina (Cuerpo) */
+body {
+    background-color: #87977a; /* Color: Verde musgo oscuro */
+    color: #333; /* Color: Texto principal gris oscuro */
+    /* line-height: Espacio vertical entre cada línea de texto para mejorar la lectura */
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+}
+
+/* 2. HEADER (Encabezado) */
+header {
+    background-color: #c6ce9f; /* Color: Fondo verde salvia claro */
+    color: white; /* Color: Texto del encabezado blanco */
+    /* padding: 40px arriba/abajo y 20px izquierda/derecha de espacio interno */
+    padding: 40px 20px;
+    /* text-align: Centra el texto horizontalmente */
+    text-align: center;
+    /* border-bottom: Crea una línea sólida de 5px en la parte inferior */
+    border-bottom: 5px solid #c7cbc5; /* Color: Borde gris */
+    /* margin-bottom: Empuja los elementos de abajo 30px hacia abajo */
+    margin-bottom: 30px;
+    /* box-shadow: Crea una sombra suave (eje X, eje Y, difuminado, color y opacidad) */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+    /* font-size: 2.2 veces el tamaño de letra base (aprox 35px) */
+    font-size: 2.2rem;
+    /* text-transform: Convierte automáticamente el texto a MAYÚSCULAS */
+    text-transform: uppercase;
+    /* letter-spacing: Separa las letras entre sí 2px */
+    letter-spacing: 2px;
+}
+
+/* 3. MENÚ DESPLEGABLE (RESPMENU) */
+
+/* Checkbox oculto que controla los clicks */
+.respmenu input[type="checkbox"] {
+    /* position: fixed: Deja el elemento anclado a la pantalla aunque hagas scroll */
+    position: fixed;
+    top: 25px; /* Separación desde arriba */
+    left: 20px; /* Separación desde la izquierda */
+    width: 40px; /* Ancho */
+    height: 40px; /* Alto */
+    /* opacity: 0 hace que no se vea, pero siga estando ahí para recibir clicks */
+    opacity: 0; 
+    /* z-index: Capa de profundidad. 1000 asegura que esté por encima de TODO lo demás */
+    z-index: 1000;
+    /* cursor: pointer: Convierte la flecha del mouse en una manita al pasar por encima */
+    cursor: pointer;
+}
+
+/* Iconos de hamburguesa y cerrar */
+.respmenu .menu-icon {
+    position: fixed;
+    top: 25px;
+    left: 20px;
+    font-size: 35px;
+    color: white; /* Color: Icono blanco */
+    z-index: 999; /* Está un nivel por debajo del checkbox */
+    /* pointer-events: none: Evita que el icono bloquee el click hacia el checkbox invisible */
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+/* Panel lateral del menú (Contenedor verde oscuro) */
+.respmenu nav.menu-links {
+    position: fixed;
+    top: 0;
+    /* left: -300px: Esconde el panel empujándolo fuera de la pantalla hacia la izquierda */
+    left: -300px; 
+    width: 250px;
+    /* height: 100vh: Ocupa el 100% del alto de la ventana del navegador (Viewport Height) */
+    height: 100vh;
+    background-color: #515C49; /* Color: Fondo verde oliva muy oscuro */
+    padding-top: 80px; /* Espacio interno superior para no tapar los iconos */
+    /* transition: Anima el movimiento de la propiedad 'left' durante 0.4 segundos */
+    transition: left 0.4s ease;
+    z-index: 998;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+}
+
+/* Si el checkbox está marcado, el panel lateral cambia su posición a 0 (entra a la pantalla) */
+.respmenu input:checked ~ nav.menu-links {
+    left: 0;
+}
+
+/* Si el checkbox está marcado, oculta el icono de hamburguesa */
+.respmenu input:checked ~ .open-icon {
+    display: none;
+}
+
+/* Si el checkbox NO está marcado, oculta la tachita (cerrar) */
+.respmenu input:not(:checked) ~ .close-icon {
+    display: none;
+}
+
+/* Quita los puntos viñeta de la lista del menú */
+.respmenu ul {
+    list-style: none;
+}
+
+/* Texto de las opciones del menú */
+.respmenu li a {
+    /* display: block: Hace que el enlace ocupe todo el ancho disponible, facilitando el click */
+    display: block;
+    color: white; /* Color: Letra blanca */
+    /* text-decoration: none: Quita el subrayado azul típico de los enlaces */
+    text-decoration: none;
+    font-weight: bold; /* Pone la letra en negrita */
+    padding: 15px 25px;
+    border-bottom: 1px solid #b5c0ad; /* Linea separadora clara */
+    transition: 0.3s; /* Suaviza el cambio al pasar el mouse */
+}
+
+/* Efecto al pasar el mouse por las opciones normales */
+.respmenu li a:hover {
+    background-color: #31372b; /* Color: Fondo verde casi negro al pasar el mouse */
+    /* padding-left: Empuja el texto 10px a la derecha para dar un efecto de deslizamiento */
+    padding-left: 35px;
+}
+
+/* Botón especial para ir a Flexbox */
+.respmenu li a.btn-flex {
+    background-color: #515C49; 
+    color: #31372b !important; 
+    /* margin: 10px arriba/abajo y 15px a los lados de separación exterior */
+    margin: 10px 15px;
+    /* border-radius: Redondea las esquinas del botón 5px */
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Efecto al pasar el mouse por el botón dorado */
+.respmenu li a.btn-flex:hover {
+    background-color: #8ea87b; /* Color: Dorado brillante */
+}
+
+/* 4. CONTENEDOR DE BIENVENIDA */
+.container {
+    width: 90%; /* Ocupa el 90% del ancho de la pantalla */
+    /* margin: 0 (arriba), auto (lados para centrar), 40px (abajo) */
+    margin: 0 auto 40px auto;
+    /* overflow: hidden: Fuerza al contenedor a abrazar su contenido interno para que no se desborde */
+    overflow: hidden; 
+    background: white; /* Color: Fondo blanco */
+    border-radius: 12px; /* Esquinas muy redondeadas */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.content {
+    /* width: 100%: Ocupa todo el espacio de su padre (.container) */
+    width: 100%;
+    text-align: center;
+    padding: 30px; /* 30px de aire interno por los cuatro lados */
+}
+
+/* 5. CATÁLOGO (BOX MODEL CLÁSICO CON FLOATS) */
+.catalog {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 50px;
+    overflow: hidden; /* CRÍTICO: Sin esto, los floats internos romperían el diseño */
+}
+
+/* Fondo, borde y dimensiones de las cartas */
+.card {
+    /* width: 31.33%: Al ser 3 tarjetas, suman casi el 100% dejando espacio para los márgenes */
+    width: 31.33%; 
+    /* margin: 0 (arriba), 1% (derecha), 30px (abajo), 1% (izquierda) */
+    margin: 0 1% 30px 1%;
+    /* float: left: Propiedad clásica del Box Model. Empuja el elemento a la izquierda formando columnas */
+    float: left; 
+    background-color: white; 
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden; /* Hace que las imágenes respeten las esquinas redondeadas de la tarjeta */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Animación al pasar el mouse sobre las cartas */
+.card:hover {
+    border-color: #c9a764; /* Color: Borde dorado */  
+    /* transform: translateY(-8px): Eleva la tarjeta 8 píxeles hacia arriba */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15); /* Sombra más grande para dar efecto de flotación */
+}
+
+.card img {
+    width: 100%; /* La imagen ocupa todo el ancho de la tarjeta */
+    height: 200px; /* Altura fija para que todas las fotos sean uniformes */
+    /* object-fit: cover: Recorta la imagen sin deformarla para que llene su caja */
+    object-fit: cover;
+    /* display: block: Quita un pequeño espacio en blanco que a veces queda debajo de las imágenes */
+    display: block;
+}
+
+/* Titulo de las cartas */
+.card h3 {
+    padding: 15px 15px 5px 15px; /* Espaciado: Arriba, Derecha, Abajo, Izquierda (Agujas del reloj) */
+    color: #c9a764; /* Color: Letra dorada */
+    font-size: 1.2rem;
+}
+
+/* Texto descriptivo de las cartas */
+.card p {
+    padding: 0 15px 20px 15px;
+    color: #666; /* Letra gris */
+    font-size: 0.95rem;
+}
+
+/* 6. FOOTER (Pie de página) */
+footer {
+    /*  Le dice al footer que no deje que ningún 'float' se ponga a sus lados, empujándolo hasta el fondo de la página */
+    clear: both; 
+    background-color: #c6ce9f; /* Color: Fondo verde salvia claro */
+    color: #444; /*  Letra gris oscura */
+    padding: 30px; /* Espacio interno para que el texto respire */
+    text-align: center;
+    border-top: 3px solid #b5bc8f; /* Color: Borde verde superior un poco más oscuro */
+    /* margin-top: Separa el footer 40px del catálogo de arriba */
+    margin-top: 40px;
+}
